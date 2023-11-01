@@ -1,16 +1,14 @@
 import React, { useContext, createContext } from 'react';
-
 import { useAddress, useContract, useMetamask, useContractWrite } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
-import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0x63C9B01022f2E335518ac0E932B3CCC865af5526');
-  const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
+  const { contract} = useContract("0x0a1E703fA50C433576D1742F9c87eb780fdBB6b7");
+  const { mutateAsync: createCampaign ,isLoading} = useContractWrite(contract, 'createCampaign'); //this will allow to call the function and create a campaign we passing all the parameter to it.
 
-  const address = useAddress();
+  const address = useAddress();  //use address of smart contract
   const connect = useMetamask();
 
   const publishCampaign = async (form) => {
